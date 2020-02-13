@@ -12,6 +12,16 @@
 
 $(document).ready(function(){
   $.ajax({
+    url: "http://157.230.17.132:3015/todos",
+    method: "GET",
+    success: function (data, response) {
+      console.log(data);
+    },
+
+    error: function (error, state, request) {
+      console.log(error);
+    }
+
 
   });
 
