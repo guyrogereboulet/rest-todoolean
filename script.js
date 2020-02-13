@@ -42,7 +42,7 @@ function printTodolist() {
   $.ajax({
     url: "http://157.230.17.132:3015/todos",
     method: "GET",
-    success: function (data, response) {
+    success: function (data) {
       console.log(data);
 
       var source = $("#entry-template").html();

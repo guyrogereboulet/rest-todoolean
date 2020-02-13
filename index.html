@@ -8,20 +8,25 @@
     <title>rest-todoolean</title>
   </head>
   <body>
-    <header>
-      <input class="input-list" type="text" name="" value="">
-      <button class="botton-list" type="button" name="button">Invio</button>
-    </header>
-    <ol class="list">
+    <div class="container">
+      <header>
+        <input class="input-list" type="text" name="" value="">
+        <button class="botton-list" type="button" name="button">Invio</button>
+      </header>
+      <ol class="list">
 
-    </ol>
-    <!-- handlebars -->
+      </ol>
+
+    </div>
+
+    <!-- script handlebars -->
     <script id="entry-template" type="text/x-handlebars-template">
       <div class="list-container">
         <li class= "list-element" data-id="{{id}}">{{body}}</li>
         <span class="delete-list-element">X</span>
       </div>
     </script>
+    <!-- script javascript -->
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
