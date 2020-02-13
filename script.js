@@ -10,12 +10,44 @@
 //
 // Guy Roger Eboulet - http://157.230.17.132:3015/todos
 
+// CREATE
+// READ
+// UPDATE
+// DELETE
+
 $(document).ready(function(){
+  printlist();
+
+  $(".botton-list").on("click", function () {
+    
+
+  });
+
+
+
+});
+
+
+
+// FUNCTION
+// Read-CRUD
+function printlist() {
   $.ajax({
     url: "http://157.230.17.132:3015/todos",
     method: "GET",
     success: function (data, response) {
       console.log(data);
+
+      var source = $("#entry-template").html();
+      var template = Handlebars.compile(source);
+
+      for (var i = 0; i < data.length; i++) {
+        var element = data[i];
+        console.log(element);
+        var context = {body: element.text};
+        var html = template(context);
+        $("ol.list").append(html);
+      }
     },
 
     error: function (error, state, request) {
@@ -25,6 +57,7 @@ $(document).ready(function(){
 
   });
 
+}
 
 
-});
+// Creat-CRUD
