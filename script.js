@@ -18,9 +18,16 @@
 $(document).ready(function(){
   printTodolist();
 
-  $(".botton-list").on("click", function () {
+  $(document).on("click",".botton-list", function () {
     var todoValue = $(".input-list").val();
     createTodo(todoValue);
+  });
+
+  $(document).on("click", ".delete-list-element", function () {
+    var thisElement = $(this);
+    var idTodo = thisElement.siblings().attr('data-id');
+    console.log(idTodo);
+    deleteTodo(idTodo);
   });
 
 
@@ -44,7 +51,10 @@ function printTodolist() {
       for (var i = 0; i < data.length; i++) {
         var element = data[i];
         console.log(element);
-        var context = {body: element.text};
+        var context = {
+          body: element.text,
+          id: element.id
+        };
         var html = template(context);
         $("ol.list").append(html);
       }
@@ -80,7 +90,26 @@ function createTodo(todoValue) {
       console.log("Errore" + error);
     }
 
+  });
 
+}
+
+
+// Delete-CRUD
+function deleteTodo(id) {
+  $.ajax({
+    url: "http://157.230.17.132:3015/todos/" + id ,
+    method: "DELETE",
+    success: function (data) {
+      //Svuotiamo quello che c'è nella lista:
+      $("ol.list").html("");
+      //Ristampiamo la lista svuotata:
+      printTodolist();
+
+    },
+    error: function (error, state) {
+      console.log("Errore" + error);
+    }
 
   });
 
