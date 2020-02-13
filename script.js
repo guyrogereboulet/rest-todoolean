@@ -16,11 +16,11 @@
 // DELETE
 
 $(document).ready(function(){
-  printlist();
+  printTodolist();
 
   $(".botton-list").on("click", function () {
-    
-
+    var todoValue = $(".input-list").val();
+    createTodo(todoValue);
   });
 
 
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 // FUNCTION
 // Read-CRUD
-function printlist() {
+function printTodolist() {
   $.ajax({
     url: "http://157.230.17.132:3015/todos",
     method: "GET",
@@ -60,4 +60,28 @@ function printlist() {
 }
 
 
-// Creat-CRUD
+// Create-CRUD
+function createTodo(todoValue) {
+
+  $.ajax({
+    url: "http://157.230.17.132:3015/todos",
+    method: "POST",
+    data: {
+      text: todoValue
+    },
+    success: function (data) {
+      //Svuotiamo quello che c'è nella lista:
+      $("ol.list").html("");
+      //Ristampiamo la lista svuotata:
+      printTodolist();
+
+    },
+    error: function (error, state) {
+      console.log("Errore" + error);
+    }
+
+
+
+  });
+
+}
