@@ -20,7 +20,6 @@ $(document).ready(function(){
 
   $(document).on("click",".botton-list", function () {
     var todoValue = $(".input-list").val();
-
     //aggiungo il cerchio di caricamento
     $(".loading").addClass("active");
     setTimeout(createTodo, 2000, todoValue)
@@ -31,6 +30,8 @@ $(document).ready(function(){
     var thisElement = $(this);
     var idTodo = thisElement.siblings().attr('data-id');
     console.log(idTodo);
+    //aggiungo il cerchio di caricamento
+    $(".loading").addClass("active");
     deleteTodo(idTodo);
   });
 
