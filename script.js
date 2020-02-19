@@ -20,7 +20,11 @@ $(document).ready(function(){
 
   $(document).on("click",".botton-list", function () {
     var todoValue = $(".input-list").val();
-    createTodo(todoValue);
+
+    //aggiungo il cerchio di caricamento
+    $(".loading").addClass("active");
+    setTimeout(createTodo, 2000, todoValue)
+    // createTodo(todoValue);
   });
 
   $(document).on("click", ".delete-list-element", function () {
@@ -58,6 +62,8 @@ function printTodolist() {
         var html = template(context);
         $("ol.list").append(html);
       }
+      //Rimuovo il cerchio di caricamento
+      $(".loading").removeClass("active");
     },
 
     error: function (error, state, request) {
@@ -81,7 +87,8 @@ function createTodo(todoValue) {
     },
     success: function (data) {
       //Svuotiamo quello che c'è nella lista:
-      $("ol.list").html("");
+      clear();
+
       //Ristampiamo la lista svuotata:
       printTodolist();
 
@@ -102,7 +109,7 @@ function deleteTodo(id) {
     method: "DELETE",
     success: function (data) {
       //Svuotiamo quello che c'è nella lista:
-      $("ol.list").html("");
+      clear();
       //Ristampiamo la lista svuotata:
       printTodolist();
 
@@ -113,4 +120,8 @@ function deleteTodo(id) {
 
   });
 
+}
+
+function clear() {
+ $("ol.list").html("");
 }
